@@ -65,7 +65,7 @@ void draw() {
       a.behaviour();
     }
      //check for mates and kill animals
-    for(int i = 0; i < animals.size(); i++)
+    for(int i = 0; i < animals.size()-1; i++)
     {
       if(animals.get(i).getStatus() == true)
       {
