@@ -4,16 +4,18 @@ abstract class Animal {
   boolean dead;
   Tile location;
   
-  void move()
+  void behaviour()
   {
   }
-  void reproduce()
+  void reproduce(Animal mate)
   {
   }
   void die()
   {
     dead = true;
     age = 0;
+    Tile d = new Tile(0,0,"empty");
+    location = d;
     
   }
   void draw()
@@ -22,6 +24,9 @@ abstract class Animal {
   void incrementAge()
   {
     age++;
+  }
+  void checkForMate()
+  {
   }
   //utility functions
   boolean getStatus()
