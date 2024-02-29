@@ -1,11 +1,9 @@
 //grid variables
 int scale = 8;
 int cols , rows;
-//animal lists
-ArrayList<Bunny> bunnies = new ArrayList<Bunny>();
-ArrayList<Fox> foxes = new ArrayList<Fox>();
-int nbunnies = 100;
-int nfoxes = 80;
+//animal list
+ArrayList<Animal> animals = new ArrayList<Animal>();
+int nanimals = 100;
 //time
 int lastRecordedTime;
 int interval;
@@ -25,32 +23,32 @@ void setup() {
   lastRecordedTime = 0;
   interval = 100;
   g = new TileGrid(cols, rows);
-  
-  //for loop to fill bunny list with bunny objects
-  for(int i = 0; i < nbunnies; i++)
+  //loop to fill animal list with bunny and fox objects
+  for(int i = 0; i < nanimals; i++)
   {
-    int randomCol = int(random(cols));
-    int randomRow = int(random(rows));
-    Tile selected = g.getTile(randomCol, randomRow);
-    selected.has = "bunny";
-    Bunny bun = new Bunny(selected);
-    bunnies.add(bun);
-    
-  }
-  //for loop to fill fox list with fox objects
-  for(int i = 0; i < nfoxes; i++)
-  {
-    int randomCol = int(random(cols));
-    int randomRow = int(random(rows));
-    Tile selected = g.getTile(randomCol, randomRow);
-    //if tile has bunny inside, do not spawn
-    if(selected.has == "bunny")
+    if(i < 50)
     {
-      return;
+      int randomCol = int(random(cols));
+      int randomRow = int(random(rows));
+      Tile selected = g.getTile(randomCol, randomRow);
+      selected.has = "bunny";
+      Bunny bun = new Bunny(selected);
+      animals.add(bun);
     }
-    selected.has = "fox";
-    Fox fo = new Fox(selected);
-    foxes.add(fo);
+    else if(i >= 50)
+    {
+      int randomCol = int(random(cols));
+      int randomRow = int(random(rows));
+      Tile selected = g.getTile(randomCol, randomRow);
+      //if tile has bunny inside, do not spawn
+      if(selected.has == "bunny")
+      {
+        return;
+      }
+      selected.has = "fox";
+      Fox fo = new Fox(selected);
+      animals.add(fo);
+    }
   }
  
 }
@@ -59,69 +57,31 @@ void draw() {
   background(250);
   //drawing
   g.draw();
-  for(Bunny b: bunnies)
-    {
-      b.draw();
-    }
-    for(Fox f: foxes)
-    {
-      f.draw();
-    }
  //simulating in time controlled enviroment
   if(millis() - lastRecordedTime > interval)
   {
-    for(Bunny b: bunnies)
+    for(Animal a : animals)
     {
-      //bunnies stop moving when energy depletes
-      if(b.energy > 1)
-      {
-        b.move();
-      }
-      else
-      {
-        b.energy++;
-      }
-      b.incrementAge();
+      a.behaviour();
     }
-    for(Fox f: foxes)
+     //check for mates and kill animals
+    for(int i = 0; i < animals.size(); i++)
     {
-      f.move();
-      f.incrementAge();
-    }
-    //check for mates
-    for(int i = 0; i < bunnies.size(); i++)
-    {
-      //can only reproduce if energy is higher
-      if(bunnies.size() < 400 && bunnies.get(i).energy > 1) //cap
+      if(animals.get(i).getStatus() == true)
       {
-        bunnies.get(i).checkForMate();
+        animals.remove(i);
       }
-    }
-    for(int i = 0; i < foxes.size(); i++)
-    {
-      //can only reproduce if hunger is higher
-      if(foxes.size() < 400 && foxes.get(i).hunger > 40) //cap
-      { 
-         foxes.get(i).checkForMate();
+      if(animals.size() < 800)
+      {
+        animals.get(i).checkForMate();
       }
+      
     }
     lastRecordedTime = millis();
   }
-  //kill bunnies
-  for(int i = 0; i < bunnies.size(); i++)
+  for(Animal a: animals)
   {
-    if(bunnies.get(i).getStatus() == true)
-    {
-      bunnies.remove(i);
-    }
-  }
-  //kill foxes
-  for(int i = 0; i < foxes.size(); i++)
-  {
-    if(foxes.get(i).getStatus() == true)
-    {
-      foxes.remove(i);
-    }
+    a.draw();
   }
 }
 
@@ -145,12 +105,5 @@ class childApplet extends PApplet {
   }
   public void draw() {
     x += 0.1;
-    
-    stroke(0,0,255);
-    fill(0,0,255);
-    rect(x,bunnies.size()/2, 2, 2);
-    stroke(255,0,0);
-    fill(255,0,0);
-    rect(x,foxes.size()/2, 2, 2);
   }
 }
