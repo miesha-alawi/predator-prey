@@ -16,7 +16,8 @@ class Fox extends Animal{
       gender = true;
     }
   }
-  void move()
+  @Override
+  void behaviour()
   {
     hunt();
     location.has="empty";
@@ -39,7 +40,7 @@ class Fox extends Animal{
     {
       die();
     }
-   
+   incrementAge();
   }
   void hunt()
   {
@@ -49,17 +50,18 @@ class Fox extends Animal{
     {
       if(t.getInside() == "bunny")
       {
-        for(Bunny b: bunnies)
+        for(Animal a: animals)
         {
-          if(b.location == t)
+          if(a.location == t)
           {
-            b.die();
+            a.die();
           }
         }
         hunger++;
       }
     }
   }
+  @Override
   void checkForMate()
   {
     if(age >= 30)
@@ -70,11 +72,11 @@ class Fox extends Animal{
     {
       if(t.getInside() == "fox")
       {
-        for(int i = 0; i < foxes.size(); i++)
+        for(int i = 0; i < animals.size(); i++)
         {
-          if(foxes.get(i).location == t)
+          if(animals.get(i).location == t)
           {
-            reproduce(foxes.get(i));
+            reproduce(animals.get(i));
           }
         }
       }
@@ -82,7 +84,8 @@ class Fox extends Animal{
     }
 
   }
-  void reproduce(Fox mate)
+  @Override
+  void reproduce(Animal mate)
   {
     if(mate.getGender() != gender)
     {
@@ -93,13 +96,14 @@ class Fox extends Animal{
           {
           Tile birthplace = g.getEmptyAdjacentTile(location);
           Fox baby = new Fox(birthplace);
-          foxes.add(baby);
+          animals.add(baby);
           }
         }
         
 
     }
   }
+  @Override
   void draw()
   {
     fill(255,0,0);
