@@ -17,7 +17,7 @@ class Bunny extends Animal {
     }
   }
   @Override
-  void move()
+  void behaviour()
   {
     
     location.has="empty";
@@ -37,7 +37,9 @@ class Bunny extends Animal {
       die();
     }
     energy--;
+    incrementAge();
   }
+  @Override
   void checkForMate()
   {
     if(age >= 30) //can only reproduce when old enough
@@ -48,11 +50,11 @@ class Bunny extends Animal {
     {
       if(t.getInside() == "bunny")
       {
-        for(int i = 0; i < bunnies.size(); i++)
+        for(int i = 0; i < animals.size(); i++)
         {
-          if(bunnies.get(i).location == t)
+          if(animals.get(i).location == t)
           {
-            reproduce(bunnies.get(i));
+            reproduce(animals.get(i));
           }
         }
       }
@@ -60,7 +62,8 @@ class Bunny extends Animal {
     }
 
   }
-  void reproduce(Bunny mate)
+  @Override
+  void reproduce(Animal mate)
   {
     if(mate.getGender() != gender)
     {
@@ -68,10 +71,11 @@ class Bunny extends Animal {
         {
           Tile birthplace = g.getEmptyAdjacentTile(location);
           Bunny baby = new Bunny(birthplace);
-          bunnies.add(baby);
+          animals.add(baby);
         }
     }
   }
+  @Override
   void draw()
   {
     fill(0,0,255);
