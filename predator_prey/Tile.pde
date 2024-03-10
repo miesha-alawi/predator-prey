@@ -11,7 +11,7 @@ class Tile{
   }
   
   void draw() {
-   fill(255);
+   noFill();
    stroke(0);
    rect(centx,centy,scale,scale);
   }
