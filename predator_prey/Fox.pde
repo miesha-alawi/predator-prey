@@ -6,6 +6,7 @@ class Fox extends Animal{
     age = 0;
     hunger = 100;
     dead = false;
+    species = "fox";
     int chance = int(random(2));
     if(chance == 1)
     {
@@ -29,7 +30,7 @@ class Fox extends Animal{
     else
     {
       location = g.getEmptyAdjacentTile(location);
-      location.has = "fox";
+      location.has = species;
     }
     hunger--;
     if(hunger <= 0) //die of hunger
@@ -60,29 +61,6 @@ class Fox extends Animal{
         hunger++;
       }
     }
-  }
-  @Override
-  void checkForMate()
-  {
-    if(age >= 30)
-    {
-    ArrayList<Tile> s = new ArrayList<Tile>();
-    s = g.getAdjacentTiles(location.centx,location.centy);
-    for(Tile t : s)
-    {
-      if(t.getInside() == "fox")
-      {
-        for(int i = 0; i < animals.size(); i++)
-        {
-          if(animals.get(i).location == t)
-          {
-            reproduce(animals.get(i));
-          }
-        }
-      }
-    }
-    }
-
   }
   @Override
   void reproduce(Animal mate)
