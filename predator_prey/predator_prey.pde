@@ -105,5 +105,29 @@ class childApplet extends PApplet {
   }
   public void draw() {
     x += 0.1;
+    int bunnie = 0;
+    int foxe = 0;
+    for(Animal a: animals)
+    {
+      if(a.species == "bunny")
+      {
+        bunnie++;
+      }
+      else if(a.species == "fox")
+      {
+        foxe++;
+      }
+    }
+    
+    for(int i = 0; i < bunnie; i++)
+    {
+      stroke(0,0,255);
+      point(x,bunnie);
+    }
+    for(int i = 0; i < foxe; i++)
+    {
+      stroke(255,0,0);
+      point(x,foxe);
+    }
   }
 }
