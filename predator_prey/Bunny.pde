@@ -3,6 +3,7 @@ class Bunny extends Animal {
   
   Bunny(Tile l)
   {
+    species = "bunny";
     location = l;
     age = 0;
     dead = false;
