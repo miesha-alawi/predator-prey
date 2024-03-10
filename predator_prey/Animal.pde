@@ -3,6 +3,7 @@ abstract class Animal {
   boolean gender;
   boolean dead;
   Tile location;
+  String species;
   
   void behaviour()
   {
@@ -26,8 +27,28 @@ abstract class Animal {
   {
     age++;
   }
+
   void checkForMate()
   {
+    if(age >= 30) //can only reproduce when old enough
+    {
+    ArrayList<Tile> s = new ArrayList<Tile>();
+    s = g.getAdjacentTiles(location.centx,location.centy);
+    for(Tile t : s)
+    {
+      if(t.getInside() == species)
+      {
+        for(int i = 0; i < animals.size(); i++)
+        {
+          if(animals.get(i).location == t)
+          {
+            reproduce(animals.get(i));
+          }
+        }
+      }
+    }
+    }
+
   }
   //utility functions
   boolean getStatus()
