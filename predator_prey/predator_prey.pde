@@ -26,7 +26,7 @@ void setup() {
   //loop to fill animal list with bunny and fox objects
   for(int i = 0; i < nanimals; i++)
   {
-    if(i < 50)
+    if(i < nanimals/2)
     {
       int randomCol = int(random(cols));
       int randomRow = int(random(rows));
@@ -35,7 +35,7 @@ void setup() {
       Bunny bun = new Bunny(selected);
       animals.add(bun);
     }
-    else if(i >= 50)
+    else
     {
       int randomCol = int(random(cols));
       int randomRow = int(random(rows));
