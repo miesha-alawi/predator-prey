@@ -33,7 +33,15 @@ class TileGrid {
   
   Tile getTile(int col, int row)
   {
-    return grid[col][row];
+    if(col < 0 || row < 0 || col > cols-1 || row > rows-1)
+    {
+      return null;
+    }
+    else
+    {
+      return grid[col][row];
+    }
+    
   }
   
   //checks if all adjacent locations are full
@@ -62,44 +70,12 @@ class TileGrid {
   //returns a list of adjacent tile locations
   ArrayList<Tile> getAdjacentTiles(int co, int ro)
   {
-    Tile sa;
-    Tile sb;
-    Tile sc;
-    Tile sd;
     int c = co/8;
     int r = ro/8;
-    try
-    {
-      sa = getTile(c, r-1);//0,-1
-    }
-    catch(ArrayIndexOutOfBoundsException e)
-    {
-      sa = null;
-    }
-    try
-    {
-      sb = getTile(c-1, r);//-1,0
-    }
-    catch(ArrayIndexOutOfBoundsException e)
-    {
-      sb = null;
-    }
-    try
-    {
-      sc = getTile(c+1, r);//+1,0
-    }
-    catch(ArrayIndexOutOfBoundsException e)
-    {
-      sc = null;
-    }
-    try
-    {
-      sd = getTile(c, r+1);//0, +1
-    }
-    catch(ArrayIndexOutOfBoundsException e)
-    {
-      sd = null;
-    }
+    Tile sa = getTile(c, r-1);//0,-1
+    Tile sb = getTile(c-1, r);//-1,0
+    Tile sc = getTile(c+1, r);//+1,0
+    Tile sd = getTile(c, r+1);//0, +1
     ArrayList<Tile> t = new ArrayList<Tile>();
     if(sa != null)
     {
