@@ -29,7 +29,7 @@ class Bunny extends Animal {
     else
     {
       location = g.getEmptyAdjacentTile(location);
-      location.has="bunny";
+      location.has= species;
       
     }
     if(age > 100) //die of old age
@@ -38,29 +38,6 @@ class Bunny extends Animal {
     }
     energy--;
     incrementAge();
-  }
-  @Override
-  void checkForMate()
-  {
-    if(age >= 30) //can only reproduce when old enough
-    {
-    ArrayList<Tile> s = new ArrayList<Tile>();
-    s = g.getAdjacentTiles(location.centx,location.centy);
-    for(Tile t : s)
-    {
-      if(t.getInside() == "bunny")
-      {
-        for(int i = 0; i < animals.size(); i++)
-        {
-          if(animals.get(i).location == t)
-          {
-            reproduce(animals.get(i));
-          }
-        }
-      }
-    }
-    }
-
   }
   @Override
   void reproduce(Animal mate)
