@@ -1,6 +1,4 @@
-
 class Bunny extends Animal {
-  int energy = 10;
   
   Bunny(Tile l)
   {
@@ -8,6 +6,7 @@ class Bunny extends Animal {
     location = l;
     age = 0;
     dead = false;
+    //gender chance
     int chance = int(random(2));
     if(chance == 1)
     {
@@ -21,7 +20,7 @@ class Bunny extends Animal {
   @Override
   void behaviour()
   {
-    
+    //move randomly
     location.has="empty";
     if(g.checkFullLocations(location))
     {
@@ -38,7 +37,6 @@ class Bunny extends Animal {
     {
       die();
     }
-    energy--;
     incrementAge();
   }
   
