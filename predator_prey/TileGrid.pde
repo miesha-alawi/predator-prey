@@ -31,6 +31,20 @@ class TileGrid {
     }
   }
   
+  //returns an animal in a given tile
+  Animal getAnimal(Tile loc)
+  {
+    Animal toReturn = null;
+    for(Animal a: animals)
+    {
+      if(a.location == loc)
+      {
+        toReturn = a;
+      }
+    }
+    return toReturn;
+  }
+  
   Tile getTile(int col, int row)
   {
     if(col < 0 || row < 0 || col > cols-1 || row > rows-1)
@@ -72,10 +86,10 @@ class TileGrid {
   {
     int c = co/8;
     int r = ro/8;
-    Tile sa = getTile(c, r-1);//0,-1
-    Tile sb = getTile(c-1, r);//-1,0
-    Tile sc = getTile(c+1, r);//+1,0
-    Tile sd = getTile(c, r+1);//0, +1
+    Tile sa = getTile(c, r-1);//0,-1 above
+    Tile sb = getTile(c-1, r);//-1,0 left
+    Tile sc = getTile(c+1, r);//+1,0 right 
+    Tile sd = getTile(c, r+1);//0, +1 below
     ArrayList<Tile> t = new ArrayList<Tile>();
     if(sa != null)
     {
