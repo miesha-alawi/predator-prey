@@ -18,15 +18,18 @@ void settings() {
 void setup() {
   windowTitle("Main");
   graph = new childApplet();
+  //grid made according to window size
   cols = width/scale;
   rows = height/scale;
+  g = new TileGrid(cols, rows);
+  //time
   lastRecordedTime = 0;
   interval = 100;
-  g = new TileGrid(cols, rows);
   //loop to fill animal list with bunny and fox objects
   for(int i = 0; i < nanimals; i++)
   {
-    if(i < nanimals/2)
+    //half of list filled with bunnies, other half filled with foxes
+    if(i <= nanimals/2)
     {
       int randomCol = int(random(cols));
       int randomRow = int(random(rows));
@@ -71,7 +74,7 @@ void draw() {
       {
         animals.remove(i);
       }
-      if(animals.size() < 800)
+      if(animals.size() < 300)
       {
         animals.get(i).checkForMate();
       }
@@ -84,6 +87,7 @@ void draw() {
     a.draw();
   }
 }
+
 
 //second window
 class childApplet extends PApplet {
