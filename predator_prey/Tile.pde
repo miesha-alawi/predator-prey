@@ -2,6 +2,7 @@ class Tile{
   int centx;
   int centy;
   String has;
+  int c;
   
   Tile(int x, int y, String h)
   {
