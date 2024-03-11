@@ -36,6 +36,7 @@ abstract class Animal {
     s = g.getAdjacentTiles(location.centx,location.centy);
     for(Tile t : s)
     {
+      //if animal adjacent is same species
       if(t.getInside() == species)
       {
         Animal mate = g.getAnimal(t);
@@ -57,21 +58,4 @@ abstract class Animal {
   {
     return gender;
   }
-  Tile getLocation()
-  {
-    return location;
-  }
-  int getX()
-  {
-    return location.centx;
-  }
-  int getY()
-  {
-    return location.centy;
-  }
-  void setLocation(Tile l)
-  {
-    location = l;
-  }
-  
 }
