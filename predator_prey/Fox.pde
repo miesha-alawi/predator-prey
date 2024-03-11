@@ -9,6 +9,7 @@ class Fox extends Animal{
     hunger = 200;
     dead = false;
     prey = null;
+    //gender chance
     int chance = int(random(2));
     if(chance == 1)
     {
@@ -23,15 +24,19 @@ class Fox extends Animal{
   @Override
   void behaviour()
   {
+    //look for a target to hunt
     hunt();
+    //if no target found
     if(prey == null)
     {
       moveRandomly();
     }
     else
     {
+      //else chase target
      location.has = "empty";
      location = chase(prey);
+     //error
      location.has = species;
     }
     
@@ -150,17 +155,13 @@ class Fox extends Animal{
     {
       if(t.getInside() == "bunny")
       {
-        for(Animal a: animals)
-        {
-          if(a.location == t)
-          {
-            a.die();
-          }
-        }
+        Animal captured = g.getAnimal(t);
+        captured.die();
         hunger++;
       }
     }
   }
+  
   @Override
   void reproduce(Animal mate)
   {
