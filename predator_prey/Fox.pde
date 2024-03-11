@@ -156,8 +156,11 @@ class Fox extends Animal{
       if(t.getInside() == "bunny")
       {
         Animal captured = g.getAnimal(t);
+        if(captured != null)
+        {
         captured.die();
         hunger++;
+        }
       }
     }
   }
