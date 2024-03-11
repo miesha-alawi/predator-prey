@@ -38,12 +38,10 @@ abstract class Animal {
     {
       if(t.getInside() == species)
       {
-        for(int i = 0; i < animals.size(); i++)
+        Animal mate = g.getAnimal(t);
+        if(mate != null)
         {
-          if(animals.get(i).location == t)
-          {
-            reproduce(animals.get(i));
-          }
+        reproduce(mate);
         }
       }
     }
