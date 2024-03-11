@@ -47,6 +47,7 @@ class TileGrid {
   
   Tile getTile(int col, int row)
   {
+    //if tile is out of bounds return null
     if(col < 0 || row < 0 || col > cols-1 || row > rows-1)
     {
       return null;
