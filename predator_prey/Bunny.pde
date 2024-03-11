@@ -1,3 +1,4 @@
+
 class Bunny extends Animal {
   int energy = 10;
   
@@ -40,6 +41,7 @@ class Bunny extends Animal {
     energy--;
     incrementAge();
   }
+  
   @Override
   void reproduce(Animal mate)
   {
@@ -47,9 +49,12 @@ class Bunny extends Animal {
     {
       if(!g.checkFullLocations(location))
         {
+          if(age > 20)
+          {
           Tile birthplace = g.getEmptyAdjacentTile(location);
           Bunny baby = new Bunny(birthplace);
           animals.add(baby);
+          }
         }
     }
   }
