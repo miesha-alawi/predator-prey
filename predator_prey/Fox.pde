@@ -6,7 +6,7 @@ class Fox extends Animal{
     species = "fox";
     location = l;
     age = 0;
-    hunger = 80;
+    hunger = 200;
     dead = false;
     prey = null;
     int chance = int(random(2));
@@ -41,7 +41,7 @@ class Fox extends Animal{
     {
       dead = true;
     }
-     if(age > 150) //die of old age
+     if(age > 200) //die of old age
     {
       die();
     }
@@ -168,13 +168,13 @@ class Fox extends Animal{
     {
         if(!g.checkFullLocations(location))
         {
-          int birthchance = int(random(0,100));
-          if(birthchance > 50)
+          if(hunger > 50 && age > 50)
           {
           Tile birthplace = g.getEmptyAdjacentTile(location);
           Fox baby = new Fox(birthplace);
           animals.add(baby);
           }
+          
         }
         
 
