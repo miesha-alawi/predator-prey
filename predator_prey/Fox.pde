@@ -51,6 +51,11 @@ class Fox extends Animal{
       die();
     }
    incrementAge();
+    //if baby cool down has been set
+    if(babyCoolDown > 0)
+    {
+      babyCoolDown--;
+    }
   }
   
   Tile chase(Animal p)
@@ -172,11 +177,12 @@ class Fox extends Animal{
     {
         if(!g.checkFullLocations(location))
         {
-          if(hunger > 50 && age > 50)
+          if(hunger > 50 && age > 50 && babyCoolDown == 0)
           {
           Tile birthplace = g.getEmptyAdjacentTile(location);
           Fox baby = new Fox(birthplace);
           animals.add(baby);
+          babyCoolDown = 40;
           }
           
         }
