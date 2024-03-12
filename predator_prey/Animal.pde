@@ -4,6 +4,7 @@ abstract class Animal {
   boolean dead;
   Tile location;
   String species;
+  int babyCoolDown = 0;
   
   void behaviour()
   {
