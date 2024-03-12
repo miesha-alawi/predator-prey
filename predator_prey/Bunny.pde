@@ -5,7 +5,7 @@ class Bunny extends Animal {
     species = "bunny";
     location = l;
     age = 0;
-    dead = false;
+    dead = false;              
     //gender chance
     int chance = int(random(2));
     if(chance == 1)
@@ -33,11 +33,16 @@ class Bunny extends Animal {
       location.has= species;
       
     }
-    if(age > 100) //die of old age
+    if(age > 150) //die of old age
     {
       die();
     }
     incrementAge();
+    //if baby cool down has been set
+    if(babyCoolDown > 0)
+    {
+      babyCoolDown--;
+    }
   }
   
   @Override
@@ -47,11 +52,12 @@ class Bunny extends Animal {
     {
       if(!g.checkFullLocations(location))
         {
-          if(age > 20)
+          if(age > 20 && babyCoolDown == 0)
           {
           Tile birthplace = g.getEmptyAdjacentTile(location);
           Bunny baby = new Bunny(birthplace);
           animals.add(baby);
+          babyCoolDown = 20;
           }
         }
     }
