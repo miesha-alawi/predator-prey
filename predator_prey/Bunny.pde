@@ -1,7 +1,9 @@
 class Bunny extends Animal {
+  Animal threat;
   
   Bunny(Tile l)
   {
+    threat = null;
     species = "bunny";
     location = l;
     age = 0;
@@ -20,19 +22,28 @@ class Bunny extends Animal {
   @Override
   void behaviour()
   {
-    //move randomly
-    location.has="empty";
-    if(g.checkFullLocations(location))
+    checkForPredators();
+    if(threat == null)
     {
-      die();
-      //overcrowding
+      moveRandomly();
     }
     else
     {
-      location = g.getEmptyAdjacentTile(location);
-      location.has= species;
-      
+     //else run from target
+     location.has = "empty";
+     Tile temp = decideDirection(threat,false);
+     if(temp != null)
+     {
+       location = decideDirection(threat,false);
+       location.has = species;
+     }
+     else
+     {
+       threat = null;
+       moveRandomly();
+     }
     }
+    
     if(age > 150) //die of old age
     {
       die();
@@ -42,6 +53,47 @@ class Bunny extends Animal {
     if(babyCoolDown > 0)
     {
       babyCoolDown--;
+    }
+  }
+  
+  
+  void checkForPredators()
+  {
+    //create a matrix of sight
+    int count = 0;
+    int matrix = 4;
+    int extent = (int)matrix/2;
+    for(int a = -extent; a < extent; a++)
+    {
+      for(int b = -extent; b < extent; b++)
+      {
+        //location column + a
+        int i = (location.centx/8) + a;
+        //location row + b
+        int j = (location.centy/8) + b;
+        Animal target = g.getAnimal(g.getTile(i,j));
+        if(target != null)
+        {
+          if(target.species == "fox")
+          {
+            threat = target;
+          }
+          else
+          {
+            count++;
+          }
+        }
+        else 
+        {
+          count++;
+        }
+      }
+    }
+    //if no foxes were present
+    if(count >= 16)
+    {
+      threat = null;
+      
     }
   }
   
