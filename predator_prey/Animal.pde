@@ -109,8 +109,6 @@ abstract class Animal {
   
   void checkForMate()
   {
-    if(age >= 30) //can only reproduce when old enough
-    {
     ArrayList<Tile> s = new ArrayList<Tile>();
     s = g.getAdjacentTiles(location.centx,location.centy);
     for(Tile t : s)
@@ -125,7 +123,7 @@ abstract class Animal {
         }
       }
     }
-    }
+    
 
   }
   //utility functions
