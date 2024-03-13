@@ -136,7 +136,7 @@ class Fox extends Animal{
     {
         if(!g.checkFullLocations(location))
         {
-          if(hunger > 50 && age > 50 && babyCoolDown == 0)
+          if(hunger < 80 && age > 50 && babyCoolDown == 0)
           {
           Tile birthplace = g.getEmptyAdjacentTile(location);
           Fox baby = new Fox(birthplace);
