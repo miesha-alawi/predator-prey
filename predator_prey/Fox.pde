@@ -26,6 +26,7 @@ class Fox extends Animal{
   {
     //look for a target to hunt
     hunt();
+    capture();
     //if no target found
     if(prey == null)
     {
@@ -35,9 +36,17 @@ class Fox extends Animal{
     {
       //else chase target
      location.has = "empty";
-     location = chase(prey);
-     //error
-     location.has = species;
+     Tile temp = decideDirection(prey,true);
+     if(temp != null)
+     {
+       location = decideDirection(prey,true);
+       location.has = species;
+     }
+     else
+     {
+       prey = null;
+       moveRandomly();
+     }
     }
     
     
@@ -58,59 +67,6 @@ class Fox extends Animal{
     }
   }
   
-  Tile chase(Animal p)
-  {
-    capture();
-    int dirC;
-    int dirR;
-    //locations column and rows
-    int foxC = location.centx/8;
-    int foxR = location.centy/8;
-    int bunnyC = p.location.centx/8;
-    int bunnyR = p.location.centy/8;
-    //get the difference
-    int diffC = bunnyC - foxC;
-    int diffR = bunnyR - foxR;
-    if(diffC < 0)
-    {
-      dirC = -1;
-    }
-    else
-    {
-      dirC = 1;
-    }
-    
-    if(diffR < 0)
-    {
-      dirR = -1;
-    }
-    else
-    {
-      dirR = 1;
-    }
-    
-    //calc next tile to go to
-    int nextC = foxC+dirC;
-    int nextR = foxR+dirR;
-    Tile nextTile = g.getTile(nextC,nextR);
-    return nextTile;
-    
-  }
-  
-  void moveRandomly()
-  {
-    location.has="empty";
-    if(g.checkFullLocations(location))
-    {
-      die();
-      //overcrowding
-    }
-    else
-    {
-      location = g.getEmptyAdjacentTile(location);
-      location.has = species;
-    }
-  }
   
   void hunt()
   {
@@ -152,8 +108,9 @@ class Fox extends Animal{
   }
   
   
-  void capture()
+  boolean capture()
   {
+    boolean capt = false;
     ArrayList<Tile> s = new ArrayList<Tile>();
     s = g.getAdjacentTiles(location.centx,location.centy);
     for(Tile t : s)
@@ -164,10 +121,12 @@ class Fox extends Animal{
         if(captured != null)
         {
         captured.die();
+        capt = true;
         hunger++;
         }
       }
     }
+    return capt;
   }
   
   @Override
@@ -187,7 +146,6 @@ class Fox extends Animal{
           
         }
         
-
     }
   }
   @Override
