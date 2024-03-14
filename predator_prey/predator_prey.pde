@@ -3,7 +3,7 @@ int scale = 8;
 int cols , rows;
 //animal list
 ArrayList<Animal> animals = new ArrayList<Animal>();
-int nanimals = 100;
+int nanimals = 150;
 //time
 int lastRecordedTime;
 int interval;
@@ -57,7 +57,7 @@ void setup() {
 }
 
 void draw() {
-  background(250);
+  background(0);
   //drawing
   g.draw();
  //simulating in time controlled enviroment
@@ -74,7 +74,11 @@ void draw() {
       {
         animals.remove(i);
       }
-      animals.get(i).checkForMate();p
+     // if(animals.size() < 300)
+     // {
+        animals.get(i).checkForMate();
+     // }
+      
     }
     lastRecordedTime = millis();
   }
@@ -121,13 +125,15 @@ class childApplet extends PApplet {
     
     for(int i = 0; i < bunnie; i++)
     {
+      fill(0,0,255);
       stroke(0,0,255);
-      point(x,bunnie);
+      rect(x,height/2,10,-bunnie);
     }
     for(int i = 0; i < foxe; i++)
     {
+      fill(255,0,0);
       stroke(255,0,0);
-      point(x,foxe);
+      rect(x,height,10,-foxe);
     }
   }
 }
