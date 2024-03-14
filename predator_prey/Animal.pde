@@ -33,7 +33,7 @@ abstract class Animal {
     dead = true;
     age = 0;
     location.has = "empty";
-    Tile d = new Tile(0,0,"empty");
+    Tile d = new Tile(-1,-1,"empty");
     location = d;
     
   }
