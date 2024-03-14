@@ -74,11 +74,7 @@ void draw() {
       {
         animals.remove(i);
       }
-      if(animals.size() < 300)
-      {
-        animals.get(i).checkForMate();
-      }
-      
+      animals.get(i).checkForMate();p
     }
     lastRecordedTime = millis();
   }
